@@ -12,9 +12,22 @@ export class King extends Figure {
         this.name = FigureNames.KING
     }
     canMove(target: Cell): boolean {
-        if (!super.canMove(target))
+        if (!super.canMove(target)) {
             return false
-        return true;
+        }
 
+        const dx = Math.abs(this.cell.x - target.x);
+        const dy = Math.abs(this.cell.y - target.y);
+
+        if (this.cell.isEmptyVertical(target) && dy === 1)
+            return true;
+        if (this.cell.isEmptyHorizontal(target) && dx === 1)
+            return true;
+        if (this.cell.isEmptyDiagonal(target) && dx === 1)
+            return true;
+
+
+        return false
     }
+
 }
